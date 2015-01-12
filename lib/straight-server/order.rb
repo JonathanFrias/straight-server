@@ -48,6 +48,11 @@ module StraightServer
       "order_id=#{id}&amount=#{amount}&status=#{status}&address=#{address}&tid=#{tid}"
     end
 
+    def amount_in_btc(args={})
+      return format('%.8f', amount*0.00000001) if args[:as] == :string
+      (amount*0.00000001)
+    end
+
     def start_periodic_status_check
       StraightServer.logger.info "Starting periodic status checks of the order #{self.id}"
       super
